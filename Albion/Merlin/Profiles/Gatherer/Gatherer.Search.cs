@@ -79,18 +79,6 @@ namespace Merlin.Profiles.Gatherer
 
                 return;
             }
-            //ONLY TEMP TILL THE MOB CAN BE LISTED AND IS NOT NULL !!!!!
-            if (_currentTarget.name == "MOB_CRITTER_HIGHLAND_EARTHELEMENTAL_RED_02")
-            {
-                Core.Log("[Blacklisting target] Because not useable!!!");
-
-                Blacklist(_currentTarget, TimeSpan.FromMinutes(9999));
-
-                _currentTarget = null;
-                _harvestPathingRequest = null;
-
-                return;
-            }
 
             if (IdentifiedTarget(out SimulationObjectView target))
             {
@@ -298,6 +286,16 @@ namespace Merlin.Profiles.Gatherer
 
                 return (int)score;
             }).FirstOrDefault();
+
+            //ONLY TEMP TILL THE MOB CAN BE LISTED AND IS NOT NULL !!!!!
+            if (target.name == "MOB_CRITTER_HIGHLAND_EARTHELEMENTAL_RED_02")
+            {
+                Core.Log("[Blacklisting target] Because not useable!!!");
+
+                Blacklist(_currentTarget, TimeSpan.FromMinutes(9999));
+
+                return false;
+            }
 
             if (target != null)
                 Core.Log($"Resource spotted: {target.name}");
