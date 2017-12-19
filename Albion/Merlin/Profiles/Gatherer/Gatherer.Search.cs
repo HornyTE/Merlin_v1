@@ -26,7 +26,7 @@ namespace Merlin.Profiles.Gatherer
 
             if (isCurrentCluster && _allowSiegeCampTreasure && CanUseSiegeCampTreasure && (_localPlayerCharacterView.GetLoadPercent() > _percentageForSiegeCampTreasure))
             {
-                Core.Log("Start Siege Camp Treasure Routine");
+                Core.Log("Start Seige Camp Treasure Routine");
                 _state.Fire(Trigger.StartSiegeCampTreasure);
                 return;
             }
@@ -135,7 +135,7 @@ namespace Merlin.Profiles.Gatherer
                     }
                     else
                         Core.Log($"No path to {spot3d} found. Removing it from fallback objects.");
-                    
+
                     _gatheredSpots.Remove(spotToUse.Key);
                     _failedFindAttempts = 0;
                 }
@@ -286,16 +286,6 @@ namespace Merlin.Profiles.Gatherer
 
                 return (int)score;
             }).FirstOrDefault();
-
-            //ONLY TEMP TILL THE MOB CAN BE LISTED AND IS NOT NULL !!!!!
-            if (target.name == "MOB_CRITTER_HIGHLAND_EARTHELEMENTAL_RED_02")
-            {
-                Core.Log("[Blacklisting target] Because not useable!!!");
-
-                Blacklist(_currentTarget, TimeSpan.FromMinutes(9999));
-
-                return false;
-            }
 
             if (target != null)
                 Core.Log($"Resource spotted: {target.name}");

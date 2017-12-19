@@ -21,12 +21,6 @@ namespace Merlin.Profiles.Gatherer
         public void Bank()
         {
 
-            if (StuckHelper.IsPlayerStuck(_localPlayerCharacterView))
-            {
-                _harvestState.Fire(HarvestTrigger.StartUnstickingYourself);
-                return;
-            }
-
             _client = GameManager.GetInstance();
             if (_client.GetState() != GameState.Playing)
             {
@@ -107,7 +101,6 @@ namespace Merlin.Profiles.Gatherer
                 {
                     Core.Log("Path Found to Town.");
                     _worldPathingRequest = new WorldPathingRequest(currentWorldCluster, townCluster, path, _skipUnrestrictedPvPZones);
-                    _harvestState.Fire(HarvestTrigger.StartUnstickingYourself);
                 }
             }
         }
